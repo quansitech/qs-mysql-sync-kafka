@@ -1,0 +1,8 @@
+{
+  "name": "qs-mysql-sync",
+  "version": "1.0.0",
+  "description": "kafka mysql sync consumer",
+  "main": "index.js",
+  "author": "tiderjian",
+  "license": "MIT"
+}
