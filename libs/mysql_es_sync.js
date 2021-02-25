@@ -15,6 +15,7 @@ class MysqlEsSync{
         const defaultOpt = {
             mysqlConnectionLimit : 10,
             mysqlHost: '',
+            mysqlPort: 3306,
             mysqlUser: '',
             mysqlPassword: '',
             mysqlDatabase: '',
@@ -27,6 +28,7 @@ class MysqlEsSync{
         const mysqlOpt = {
             connectionLimit : this.options.mysqlConnectionLimit,
             host     : this.options.mysqlHost,
+            port     : this.options.mysqlPort,
             user     : this.options.mysqlUser,
             password : this.options.mysqlPassword,
             database : this.options.mysqlDatabase
