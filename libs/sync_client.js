@@ -42,11 +42,11 @@ class SyncClient{
 
         for(let i = 0; i < this.initModules.length; i++){
     
-            if(typeof param.module == 'string' && (param.module == 'all' || param.module === initModules[i].name)){
+            if(typeof param.module == 'string' && (param.module == 'all' || param.module === this.initModules[i].name)){
                 await this.initModules[i].init();
             }
     
-            if(param.module && typeof param.module == 'object' && param.module.includes(initModules[i].name) === true ){
+            if(param.module && typeof param.module == 'object' && param.module.includes(this.initModules[i].name) === true ){
                 await this.initModules[i].init();
             }
         }

@@ -1,8 +1,19 @@
 {
-  "name": "qs-mysql-sync",
-  "version": "1.0.0",
+  "name": "@quansitech/qs-mysql-sync-kafka",
+  "version": "v1.0.0",
   "description": "kafka mysql sync consumer",
   "main": "index.js",
+  "homepage": "https://github.com/quansitech/qs-mysql-sync-kafka",
   "author": "tiderjian",
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "dependencies": {
+    "@elastic/elasticsearch": "^7.10.0",
+    "async-lock": "^1.2.8",
+    "kafka-node": "^5.0.0",
+    "mysql": "^2.18.1",
+    "nodemailer": "^6.4.17"
+  }
 }
