@@ -73,10 +73,10 @@ class SyncClient{
 
         let delayOperations = [];
 
+        const lock = new AsyncLock();
+
         consumer.on('message', async message => {
             const esSyncData = JSON.parse(message.value);
-
-            var lock = new AsyncLock();
 
             console.log(message);
             try{
@@ -94,8 +94,13 @@ class SyncClient{
                             const opTmp = delayOperations[n].split('-');
                             const dataType = opTmp[0];
                             const op = opTmp[1];
-        
-                            await this.modulesPack[dataType][op](null, true);
+                            try{
+                                await this.modulesPack[dataType][op](null, true);
+                            }
+                            catch(e){
+                                done(e, null);
+                            }
+                            
                         }
                         delayOperations = [];
                         done(null, null);
