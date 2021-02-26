@@ -267,6 +267,20 @@ npm install @quansitech/qs-mysql-sync-kafka
        >
        >runFn 匿名函数 切分后的数组会作为参数传入该匿名函数执行
 
+    3. delayRun(runFn, delayMilliSecond) 封装了setTimeout，返回promise
+
+       >参数说明：
+       >
+       >runFn 匿名类型 需要推迟执行的函数
+       >
+       >delayMilliSecond 整数类型 延迟执行毫秒
+       >
+       >```javascript
+       >await utils.delayRun(async () => {
+       >	await doSomeThingAsync();
+       >}, 10000);
+       >```
+
 + ##### 模块接口说明
 
   1. name 模块名称

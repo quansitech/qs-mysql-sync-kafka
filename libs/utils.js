@@ -19,5 +19,22 @@ module.exports = {
           await runFn(temps);
           index += chunkSize;
       };
+    },
+    ,
+    delayRun: async (runFn, delayMilliSecond) => {
+      const p = new Promise((resolve, reject) => {
+        setTimeout(async () => {
+          try{
+            await runFn();
+            resolve();
+          }
+          catch(e){
+            reject(e);
+          }
+
+        }, delayMilliSecond);
+      });
+
+      return p;
     }
 }
