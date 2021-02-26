@@ -152,7 +152,7 @@ class MysqlEsSync{
             }
             else{
                 settings.number_of_shards = 3;
-                settings.number_of_shards = 2;
+                settings.number_of_replicas = 2;
 
                 body.settings = settings;
             }
@@ -208,7 +208,7 @@ class MysqlEsSync{
 
             await this.esBulk(res, docKey, index, pipeline);
 
-            id = res.results.pop()[docKey];
+            id = res.results.pop()[idColumn];
         }
 
         console.log(`bulkPutEsFromMysql index:${index} finished!`);
