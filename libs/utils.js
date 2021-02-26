@@ -20,7 +20,6 @@ module.exports = {
           index += chunkSize;
       };
     },
-    ,
     delayRun: async (runFn, delayMilliSecond) => {
       const p = new Promise((resolve, reject) => {
         setTimeout(async () => {
