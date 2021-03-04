@@ -149,11 +149,12 @@ npm install @quansitech/qs-mysql-sync-kafka
        >
        >body object类型 策略配置
     
-    9. executePolicy(name) 执行Es的enrich策略
+    9. executePolicy(name, requestTimeout) 执行Es的enrich策略
     
        >参数说明:
        >
        >name string类型 enrich策略名
+       >requestTimeout 整数类型 请求超时时间,单位毫秒 默认30000毫秒
     
     10. createPipeline(id, body) 创建Es 管道
     

@@ -238,10 +238,12 @@ class MysqlEsSync{
         console.log(`created policy: ${name}`);
     }
 
-    async executePolicy(name){
+    async executePolicy(name, requestTimeout = 30000){
         try{
             await this.esClient.enrich.executePolicy({
                 name
+            }, {
+                requestTimeout
             });
     
             console.log(`run policy: ${name}`);
