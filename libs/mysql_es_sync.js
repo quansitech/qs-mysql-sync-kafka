@@ -208,7 +208,7 @@ class MysqlEsSync{
 
             await this.esBulk(res, docKey, index, pipeline);
 
-            id = res.results.pop()[idColumn];
+            id = res.results.pop()[docKey];
         }
 
         console.log(`bulkPutEsFromMysql index:${index} finished!`);
