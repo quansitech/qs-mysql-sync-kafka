@@ -287,8 +287,11 @@ class MysqlEsSync{
         const res = await this.esClient.updateByQuery({
             index,
             pipeline,
+            conflicts: 'proceed',
             body
         });
+
+        console.log(res);
 
         console.log(`esUpdateByQuery index:${index} finished`);
     }
