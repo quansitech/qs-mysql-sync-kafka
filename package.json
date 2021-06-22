@@ -1,6 +1,6 @@
 {
   "name": "@quansitech/qs-mysql-sync-kafka",
-  "version": "v1.1.5",
+  "version": "v1.2.0",
   "description": "kafka mysql sync consumer",
   "main": "index.js",
   "homepage": "https://github.com/quansitech/qs-mysql-sync-kafka",
