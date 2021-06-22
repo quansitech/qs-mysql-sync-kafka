@@ -83,8 +83,7 @@ npm install @quansitech/qs-mysql-sync-kafka
        >    bulkFetchRow: 500 //批量同步每次同步的数据行数
        >};
        >```
-       >
-    
+       
     2. deleteEsIndex(index) 删除Es索引
     
        >参数说明:
@@ -787,4 +786,85 @@ node index.js consumer
   ```
 
   经改造后， update操作仅在消息收集完的最后一刻执行一次，这样就大大提高了程序的效率和稳定性。
+
+
+
++ 索引的映射类型为object时的处理方法
+
+  
+
+  一般情况下索引映射是一维类型如下
+
+  ```javascript
+  //一维的映射
+  const indexMapping = {
+      properties: {
+          id: { type: "keyword" },
+          reader_id: { type: "keyword" },
+          book_id: { type: "keyword" },
+          borrow_time: { type: "date" }
+      }
+  }
+  
+  //sql查询的字段名称和映射属性名对应即可完成导入
+  const fetchSql = (id = '', bookId = '' ) => {
+      let sql = `SELECT
+      id, 
+      reader_id, 
+      book_id, 
+      borrow_time
+      FROM borrow where 1=1`;
+      if(id){
+          sql = `${sql} and id='${id}'`;
+      }
+      if(bookId){
+          sql = `${sql} and book_id='${bookId}'`;
+      }
+      return sql;
+  };
+  ```
+
+  但如果索引映射是二维类型(object)
+
+  ```javascript
+  //二维的映射
+  const indexMapping = {
+      properties: {
+          id: { type: "keyword" },
+          reader_id: { type: "keyword" },
+          book_id: { type: "keyword" },
+          book:{
+              properties: {
+                  isbn: { type: "keyword" },
+                  book_name: { type: "keyword" }
+              }
+          }
+          borrow_time: { type: "date" }
+      }
+  }
+  
+  //查询sql的字段名称必须做特殊化的处理
+  const fetchSql = (id = '', bookId = '' ) => {
+      let sql = `SELECT
+      b.id, 
+      b.reader_id, 
+      b.book_id, 
+  	bk.book_name as "book.book_name",
+      bk.isbn as "book.isbn",
+      borrow_time
+      FROM borrow b,book bk where bk.id=b.book_id`;
+      if(id){
+          sql = `${sql} and id='${id}'`;
+      }
+      if(bookId){
+          sql = `${sql} and book_id='${bookId}'`;
+      }
+      return sql;
+  };
+  
+  //上面的sql的book_name要写成book.book_name 以表示二维的关系，中间用 "." 来分隔
+  //isbn同理
+  ```
+
+  
 

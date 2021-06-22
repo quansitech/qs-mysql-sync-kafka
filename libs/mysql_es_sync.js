@@ -105,7 +105,15 @@ class MysqlEsSync{
     
             const tmp = {};
             mysqlQueryRes.fields.forEach(field => {
-                tmp[field.name] = item[field.name];
+                if(field.name.split('.').length > 1){
+                    let propName = field.name.split('.')[0];
+                    let propKey = field.name.split('.')[1];
+                    tmp[propName] = { ...tmp[propName] }
+                    tmp[propName][propKey] = item[field.name];
+                }
+                else{
+                    tmp[field.name] = item[field.name];
+                } 
             });
             
             body.push(tmp);
