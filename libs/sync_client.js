@@ -98,6 +98,7 @@ class SyncClient{
                                 await this.modulesPack[dataType][op](null, true);
                             }
                             catch(e){
+                                console.log(e);
                                 done(e, null);
                             }
                             
